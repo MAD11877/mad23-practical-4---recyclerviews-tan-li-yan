@@ -10,28 +10,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    Boolean isFollowed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        User myUser = new User();
-        //Saving the user's name
-        String name = myUser.name;
-        //saving the user's description
-        String description = myUser.description;
+        Intent receivingEnd = getIntent();
         TextView myHeader = findViewById(R.id.textView4);
-        myHeader.setText(myUser.name + getIntent().getIntExtra("Number", 0));
+        myHeader.setText(receivingEnd.getStringExtra("name"));
+        TextView description = findViewById(R.id.textView5);
+        description.setText(receivingEnd.getStringExtra("description"));
+        isFollowed = receivingEnd.getBooleanExtra("isFollowed", false);
         Button myButton = findViewById(R.id.button4);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //set the boolean to not equal the orignial state when the button is clicked.
-                myUser.followed = !myUser.followed;
-                if(myUser.followed == false)
+                isFollowed = !isFollowed;
+                if(isFollowed == false)
                 {
                     myButton.setText("Follow");
-                    Toast.makeText(getApplicationContext(), "Unollowed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     myButton.setText("Unfollow");

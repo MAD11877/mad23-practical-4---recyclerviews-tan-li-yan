@@ -84,6 +84,9 @@ public class ListActivity extends AppCompatActivity implements  RecyclerViewInte
             builder.setPositiveButton("View", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int id){
                     Bundle extras = new Bundle();
+                    extras.putString("name", clickedUser.getName());
+                    extras.putString("description", clickedUser.getDescription());
+                    extras.putBoolean("isFollowed", clickedUser.isFollowed());
                     Intent activityName = new Intent(ListActivity.this, MainActivity.class);
                     activityName.putExtras(extras);
                     startActivity(activityName);
